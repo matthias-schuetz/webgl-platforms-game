@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>THREE.BasicThirdPersonGame - Platforms Demo - Matthias Schütz</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link href="css/game.css" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Monda" rel="stylesheet" type="text/css">
+
+		<script src="js/libs/detector.min.js"></script>
+		<script src="js/libs/three.min.js"></script>
+		<script src="js/libs/cannon.min.js"></script>
+
+		<script src="js/game/game.static.js"></script>
+		<script src="js/game/game.three.js"></script>
+		<script src="js/game/game.cannon.js"></script>
+		<script src="js/game/game.events.js"></script>
+		<script src="js/game/game.helpers.js"></script>
+		<script src="js/game/game.ui.js"></script>
+		<script src="js/game/game.core.js"></script>
+	</head>
+
+	<body>
+		<div id="game"></div>
+
+		<div id="game-ui">
+			<div id="game-ui-slowmotion">
+				<h1>Slow Motion</h1>
+			</div>
+
+			<div class="box-left">
+				<a href="http://matthiasschuetz.com/en" class="btn">
+					<span class="full">Back to website</span>
+					<span class="minimal">Back</span>
+				</a>
+			</div>
+
+			<div class="box-right">
+				<div id="game-ui-airboosts-container">
+					<h1>Air boosts</h1>
+					<h2 id="game-ui-airboosts" class="yellow">0</h2>
+
+					<div id="game-ui-airboosts-progress" data-count="0">
+						<div class="bar-top"></div>
+						<div class="bar-bottom"></div>
+					</div>
+				</div>
+
+				<div class="separator"></div>
+
+				<h1>Score</h1>
+				<h2 id="game-ui-height" class="yellow">0</h2>
+
+				<div class="separator"></div>
+
+				<a href="#" id="game-ui-btn-toggle-sound" class="sound-on"></a>
+				<a href="#" id="game-ui-btn-show-help">?</a>
+			</div>
+		</div>
+
+		<div id="game-ui-infobox-gameover" class="infobox infobox-gameover hidden">
+			<div class="header">
+				<h1>Game Over</h1>
+			</div>
+
+			<div class="block text">
+				<div>
+					Your score
+				</div>
+
+				<h2 id="game-ui-gameover-score" class="yellow large">0</h2>
+			</div>
+
+			<div class="block text space-top">
+				<div>
+					Highest score
+				</div>
+
+				<h2 id="game-ui-gameover-highestscore" class="yellow large">0</h2>
+			</div>
+
+			<div class="block text footer space-top">
+				<a href="#" id="game-ui-btn-close-infobox-gameover" class="btn">
+					OK
+				</a>
+			</div>
+		</div>
+
+		<div id="game-ui-infobox-keyboard" class="infobox infobox-keyboard no-height">
+			<div class="header">
+				<h1>How to play</h1>
+			</div>
+
+			<div class="block text">
+				<div class="txt-yellow controls-left">
+					Control spaceship
+				</div>
+
+				<div class="txt-yellow controls-right">
+					Air boost
+				</div>
+			</div>
+
+			<div class="block">
+				<div class="row">
+					<div class="key key-wide opc-15 full"></div>
+					<div class="key opc-50">Q</div>
+					<div class="key yellow">W</div>
+					<div class="key yellow-opc-50">E</div>
+					<div class="key opc-50">R</div>
+					<div class="key opc-25">T</div>
+					<div class="key opc-15 full">Z</div>
+					<div class="key opc-8 full">U</div>
+				</div>
+
+				<div class="row">
+					<div class="key key-wide opc-15 full"></div>
+					<div class="key yellow">A</div>
+					<div class="key yellow">S</div>
+					<div class="key yellow">D</div>
+					<div class="key opc-50">F</div>
+					<div class="key opc-25">G</div>
+					<div class="key opc-15 full">H</div>
+					<div class="key opc-8 full">J</div>
+				</div>
+
+				<div class="row full-height">
+					<div class="key opc-15 full"></div>
+					<div class="key opc-25 full"></div>
+					<div class="key opc-50">Y</div>
+					<div class="key opc-50">X</div>
+					<div class="key opc-50">C</div>
+					<div class="key opc-50">V</div>
+					<div class="key opc-25">B</div>
+					<div class="key opc-15 full">N</div>
+					<div class="key opc-8 full">M</div>
+				</div>
+
+				<div class="row">
+					<div class="key opc-8 full"></div>
+					<div class="key opc-15 full"></div>
+					<div class="key opc-25"></div>
+					<div class="key key-space yellow">SPACE</div>
+					<div class="key opc-15 full"></div>
+					<div class="key opc-8 full"></div>
+				</div>
+			</div>
+
+			<div class="block">
+				<div class="txt-yellow controls-bottom">
+					Jump
+				</div>
+			</div>
+
+			<div class="block text footer">
+				<a href="#" id="game-ui-btn-close-infobox-keyboard" class="btn">
+					OK
+				</a>
+			</div>
+		</div>
+
+		<div id="game-ui-infobox-help" class="infobox infobox-help hidden">
+			<div class="header">
+				<h1>About</h1>
+			</div>
+
+			<div class="block text">
+				<div class="copy">
+					This game is brought to you by <a href="http://matthiasschuetz.com/en" class="link">Matthias Schütz</a>. The <a href="https://github.com/matthias-schuetz/webgl-platforms-game/" class="link">whole code</a> is based on his 3D game development starter kit called <a href="http://matthiasschuetz.com/three-basicthirdpersongame/" class="link">THREE.BasicThirdPersonGame</a> which is freely available on GitHub. It uses <a href="http://threejs.org/" class="link">THREE.js</a> and the <a href="http://www.cannonjs.org/" class="link">Cannon.js physics engine</a>.
+				</div>
+			</div>
+
+			<div class="block text space-top">
+				<div class="block-separator">
+					Programming / Graphics / Music
+				</div>
+
+				<div>
+					&copy; 2014 Matthias Schütz
+				</div>
+			</div>
+
+			<div class="block text footer">
+				<a href="#" id="game-ui-btn-close-infobox-help" class="btn invisible">
+					Close
+				</a>
+
+				<a href="#" id="game-ui-btn-show-keyboard" class="btn invisible">
+					Show controls
+				</a>
+			</div>
+		</div>
+
+		<audio id="game-audio-music">
+			<source src="sound/music.mp3" type="audio/mpeg" />
+			<source src="sound/music.ogg" type="audio/ogg" />
+		</audio>
+
+		<audio id="game-audio-platform">
+			<source src="sound/platform.mp3" type="audio/mpeg" />
+			<source src="sound/platform.ogg" type="audio/ogg" />
+		</audio>
+
+		<audio id="game-audio-slowmotion">
+			<source src="sound/slowmotion.mp3" type="audio/mpeg" />
+			<source src="sound/slowmotion.ogg" type="audio/ogg" />
+		</audio>
+
+		<script src="js/game/init.js"></script>
+	</body>
+</html>
