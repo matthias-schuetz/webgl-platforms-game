@@ -4,7 +4,7 @@
 
 Platforms is small JavaScript/HTML5/CSS3/WebGL demo game project which was developed together with the [THREE.BasicThirdPersonGame](https://github.com/matthias-schuetz/THREE-BasicThirdPersonGame) framework. It's a free open source JavaScript micro-framework for WebGL games based on THREE.js and Cannon.js.
 
-![Platforms](http://matthias-schuetz.github.io/webgl-platforms-game/webgl-platforms-game.png "Platforms")
+![Platforms](http://matthias-schuetz.github.io/webgl-platforms-game/webgl-platforms-game.jpg "Platforms")
 
 The code of the Platforms game was made open source to give game developers and users of THREE.BasicThirdPersonGame an insight of how a final game project could look like. So there's no documentation for the game itself but the code is commented at some places.
 
