@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 				options: {
 					banner: "/*" + grunt.util.linefeed +
 						" * THREE.BasicThirdPersonGame" + grunt.util.linefeed +
-						" * http://matthiasschuetz.com/three-basicthirdpersongame" + grunt.util.linefeed +
+						" * https://github.com/matthias-schuetz/THREE-BasicThirdPersonGame" + grunt.util.linefeed +
 						" *" + grunt.util.linefeed +
 						" * Copyright (c) 2014 Matthias Schuetz" + grunt.util.linefeed +
 						" * MIT License" + grunt.util.linefeed +

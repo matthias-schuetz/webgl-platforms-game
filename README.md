@@ -8,9 +8,6 @@ Platforms is small JavaScript/HTML5/CSS3/WebGL demo game project which was devel
 
 The code of the Platforms game was made open source to give game developers and users of THREE.BasicThirdPersonGame an insight of how a final game project could look like. So there's no documentation for the game itself but the code is commented at some places.
 
-### Demo
-You can play the final game on [its website](http://matthiasschuetz.com/webgl-platforms-game).
-
 ### Usage
 
 The project is mainly intented for a comparison of the THREE.BasicThirdPersonGame examples' code. The package also contains a Gruntfile which combines and obfuscates all library and game files into one minified game.js.
